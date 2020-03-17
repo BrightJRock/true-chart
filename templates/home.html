@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hello Bulma!</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+        <!-- <script src="https://www.chartjs.org/samples/latest/utils.js"></script> -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    {% for key, value in data.items() %}
+                        {% if value is string %}
+                            ['{{ key }}', '{{ value }}'],
+                        {% else %}
+                            ['{{ key }}', {{ value }}],
+                        {% endif %}
+                    {% endfor %}
+                ]);
+
+                var options = {
+                title: 'Pie Graph 1',
+                is3D: false,
+                };
+
+                var chart1 = new google.visualization.PieChart(document.getElementById('chart-1'));
+                chart1.draw(data, options);
+                var chart2 = new google.visualization.PieChart(document.getElementById('chart-2'));
+                chart2.draw(data, options);
+            }
+        </script>
+    </head>
+    <body>
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Hello World</h1>
+                <p class="subtitle">My first website with <strong>Bulma</strong>!</p>
+                <div class="columns is-mobile is-centered">
+                    <div class="column">
+                        <div id="chart-1" style="width: 600px; height: 400px;"></div>
+                    </div>
+                    <div class="column">
+                        <div id="chart-2" style="width: 600px; height: 400px;"></div>
+                    </div>
+                </div>
+                <div class="columns is-mobile is-centered">
+                    <div class="column">
+                        333
+                    </div>
+                    <div class="column">
+                        444
+                    </div>
+                </div>
+                <div class="columns is-mobile is-centered">
+                    <div class="column">
+                        555
+                    </div>
+                    <div class="column">
+                        6666
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- <script>
+            var config = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+					],
+					backgroundColor: [
+                        window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Red',
+					'Orange',
+					'Yellow',
+					'Green',
+					'Blue'
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myPie = new Chart(ctx, config);
+		};
+        </script> -->
+    </body>
+</html>
